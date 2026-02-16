@@ -26,3 +26,8 @@ core::arch::global_asm!(
         b .
     "
 );
+
+#[unsafe(no_mangle)]
+extern "C" fn _kernel_entry() -> ! {
+    panic!("kernel main end reached");
+}
