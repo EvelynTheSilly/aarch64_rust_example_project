@@ -37,8 +37,6 @@ core::arch::global_asm!(
         
         bl setup_vtable
         
-        mov x0, x20
-        
         // enter rust
         bl main                        // go to rust entry point
         b .                            // hang forever
