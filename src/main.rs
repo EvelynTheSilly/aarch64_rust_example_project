@@ -32,7 +32,7 @@ core::arch::global_asm!(
         mov x0, x20
         
         // enter rust
-        bl _kernel_entry               // go to rust entry point
+        bl main                        // go to rust entry point
         b .                            // hang forever
         
         load_stack:
@@ -56,6 +56,6 @@ core::arch::global_asm!(
 );
 
 #[unsafe(no_mangle)]
-extern "C" fn _kernel_entry() -> ! {
-    panic!("kernel main end reached");
+extern "C" fn main() -> ! {
+    panic!("main end reached");
 }
