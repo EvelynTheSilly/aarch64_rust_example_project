@@ -61,5 +61,10 @@ core::arch::global_asm!(
 
 #[unsafe(no_mangle)]
 extern "C" fn main() -> ! {
+    println!("hey there");
+    println!("this is an example project");
+    println!("its just enough to get working on whatever you wanna do");
+    println!("have fun <3");
+    println!("");
     panic!("main end reached");
 }
