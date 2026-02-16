@@ -43,9 +43,10 @@
             cross.buildPackages.gcc
             cross.buildPackages.binutils
             (if system != "aarch64-darwin" then cross.buildPackages.gdb else null)
-            pkgs.qemu
-            pkgs.cmake
-            pkgs.just
+            qemu
+            just
+            just-lsp
+            just-formatter
             pkgs.cloc
           ];
           CARGO_UNSTABLE_JSON_TARGET_SPEC = "true";
