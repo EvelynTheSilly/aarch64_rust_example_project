@@ -23,7 +23,35 @@ core::arch::global_asm!(
     "
     .global _ENTRY
     _ENTRY:
-        b .
+        bl load_stack
+        
+        bl enable_fpu
+        
+        bl setup_vtable
+        
+        mov x0, x20
+        
+        // enter rust
+        bl _kernel_entry               // go to rust entry point
+        b .                            // hang forever
+        
+        load_stack:
+            ldr x0, =el1_stack_top
+            mov sp, x0
+            ret
+        
+        enable_fpu:
+            mrs x0, CPACR_EL1
+            orr x0, x0, #(3 << 20)     // enable fp in el1 and el0
+            msr CPACR_EL1, x0
+            isb
+            ret
+        
+        setup_vtable:
+            ldr x0, =_vector_table     // load vtable into r0
+            msr VBAR_EL1, x0
+            isb                        // move r0 to base vector table register
+            ret
     "
 );
 
