@@ -12,11 +12,13 @@
 use core::panic::PanicInfo;
 use qemu_exit::QEMUExit;
 
+mod uart;
 mod vectors;
 
 #[panic_handler]
 #[allow(unreachable_code)] // rustc complains code isnt reachable when it very much is when qemu isnt enabled
-fn panic(_: &PanicInfo) -> ! {
+fn panic(info: &PanicInfo) -> ! {
+    println!("PANIC: {}", info.message());
     qemu_exit::AArch64::new().exit(0);
     loop {} // failsafe
 }
