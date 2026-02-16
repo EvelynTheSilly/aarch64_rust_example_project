@@ -19,12 +19,12 @@ buildrun:
     just run
 
 debug:
-    mask build
-    echo "running vm"
-    echo "exit with ctrl a, then x"
-    echo "run mask start_gdb to attatch to the debugger"
-    echo ""
-    echo ""
+    just build
+    @echo "running vm"
+    @echo "exit with ctrl a, then x"
+    @echo "run mask start_gdb to attatch to the debugger"
+    @echo ""
+    @echo ""
     qemu-system-aarch64 {{qemuflags}} -S -s
 
 gdb:
